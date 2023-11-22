@@ -11,21 +11,18 @@ const answer = sample(WORDS)
 console.info({ answer })
 
 function Game() {
-
   const [guesses, setGuesses] = React.useState([])
 
-  function handleSubmitGuess(guess){
-    const nextGuess = { id: crypto.randomUUID(), name: guess }
-
+  function handleSubmitGuess(guess) {
     const nextGuesses = [...guesses]
-    nextGuesses.push(nextGuess)
+    nextGuesses.push(guess)
 
     setGuesses(nextGuesses)
   }
 
   return (
     <>
-          <GuessList guesses={guesses} />
+      <GuessList guesses={guesses} />
       <GuessInputForm handleSubmitGuess={handleSubmitGuess} />
     </>
   )
