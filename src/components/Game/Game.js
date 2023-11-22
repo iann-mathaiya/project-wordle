@@ -3,9 +3,10 @@ import React from "react"
 import { sample } from "../../utils"
 import { WORDS } from "../../data"
 import GuessList from "../GuessList/GuessList"
-import GuessInputForm from "../GuessInputForm/GuessInputForm"
+import WonBanner from "../WonBanner/WonBanner"
+import LostBanner from "../LostBanner/LostBanner"
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants"
-import GameOverBanner from "../GameOverBanner/GameOverBanner"
+import GuessInputForm from "../GuessInputForm/GuessInputForm"
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS)
@@ -29,7 +30,9 @@ function Game() {
 
   return (
     <>
-      {gameStatus !== "running" && <GameOverBanner answer={answer} gameStatus={gameStatus} guesses={guesses} />}
+      {gameStatus === "won" && <WonBanner numOfGuesses={guesses.length} />}
+      {gameStatus === "lost" && <LostBanner answer={answer} />}
+
       <GuessList guesses={guesses} answer={answer} />
       <GuessInputForm
         gameStatus={gameStatus}
